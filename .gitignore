@@ -1,0 +1,44 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+venv/
+env/
+
+# Environment variables (contains secrets)
+.env
+.env.local
+.env.production
+
+# AWS and AgentCore
+.bedrock_agentcore/
+.bedrock_agentcore.yaml
+
+# FAISS index (can be rebuilt)
+faiss_index/
+/tmp/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+temp/

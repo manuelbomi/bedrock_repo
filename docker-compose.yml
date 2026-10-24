@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - AWS_REGION=${AWS_REGION:-us-east-1}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - SESSIONS_TABLE=${SESSIONS_TABLE:-bedrock-agent-sessions}
+      - USERS_TABLE=${USERS_TABLE:-bedrock-agent-users}
+      - CORS_ORIGINS=http://localhost:3000,http://localhost:5173
+    volumes:
+      - ./backend:/app
+      - /app/__pycache__
+    command: uvicorn app:app --host 0.0.0.0 --port 8000 --reload
+    networks:
+      - bedrock-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: development
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_URL=http://localhost:8000
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    command: npm run dev -- --host
+    networks:
+      - bedrock-network
+    depends_on:
+      - backend
+
+networks:
+  bedrock-network:
+    driver: bridge
