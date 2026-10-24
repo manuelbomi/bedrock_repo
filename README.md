@@ -292,7 +292,28 @@ Default output format: json
 
 ### 3. API Keys Setup
 
-#### Step 3.1: Get Your Groq API Key
+#### Step 3.1: Why Groq? — The LPU Advantage
+
+Groq is not just another LLM API. It is built on a fundamentally different hardware architecture called the **Language Processing Unit (LPU)**.
+
+Standard LLM inference runs on GPUs, which are optimized for parallel matrix operations across thousands of cores. That works well for training, but auto-regressive text generation is an inherently **sequential process** — each token must be generated before the next one can start. GPUs are therefore underutilized during inference and face a significant **memory bandwidth bottleneck**: the model weights must be loaded from HBM (high-bandwidth memory) on every single token generation step.
+
+Groq's LPU eliminates this bottleneck by using **on-chip SRAM** — the weights stay resident on the chip and do not need to be reloaded from external memory for each token. The result is inference speeds that are **10x to 20x faster** than equivalent GPU-based services, with dramatically lower and more predictable latency.
+
+**Why this matters for agentic systems specifically:**
+
+In a standard chatbot, slow inference is annoying. In an agentic system, it is catastrophic. Each agent "turn" involves:
+
+1. Calling the LLM to decide which tool to use
+2. Executing the tool (FAISS search in our case)
+3. Calling the LLM again to interpret the tool result
+4. Generating the final response
+
+That is **2–3 LLM calls per user message**. With a slow inference backend, a single question could take 15–30 seconds. With Groq, each LLM call completes in under a second, making the agent feel genuinely responsive even in production.
+
+Groq also provides access to powerful open-source models (this project uses `openai/gpt-oss-20b`) at a fraction of the cost of proprietary APIs.
+
+#### Step 3.2: Get Your Groq API Key
 
 Groq provides extremely fast inference for open-source models at very low cost.
 
@@ -300,7 +321,7 @@ Groq provides extremely fast inference for open-source models at very low cost.
 
 ![Groq Computation Harness](docs/images/8c%20Groq%20computation%20Harness.png)
 
-#### Step 3.2: Create the `.env` File
+#### Step 3.3: Create the `.env` File
 
 ```bash
 GROQ_API_KEY=your_groq_api_key_here
