@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Architecture](docs/images/Architecture%20Diagram.png)
+![Architecture](docs/images/architecture_diagram.svg)
 
 **A production-ready prototype for deploying intelligent AI agents at enterprise scale using AWS Bedrock AgentCore**
 

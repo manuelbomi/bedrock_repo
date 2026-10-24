@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" font-family="Segoe UI, Arial, sans-serif">
+
+  <!-- Background -->
+  <rect width="900" height="620" fill="#0d1117" rx="12"/>
+
+  <!-- Title -->
+  <text x="450" y="38" text-anchor="middle" font-size="17" font-weight="bold" fill="#e6edf3">Enterprise Agentic AI — AWS Bedrock AgentCore Architecture</text>
+
+  <!-- ═══════════════ LAYER 1: FRONTEND ═══════════════ -->
+  <rect x="30" y="58" width="840" height="120" rx="10" fill="#161b22" stroke="#30a46c" stroke-width="1.5"/>
+  <text x="50" y="80" font-size="11" font-weight="bold" fill="#30a46c" letter-spacing="1">FRONTEND LAYER</text>
+
+  <!-- React UI box -->
+  <rect x="55" y="90" width="200" height="72" rx="7" fill="#1c2128" stroke="#58a6ff" stroke-width="1.2"/>
+  <text x="155" y="113" text-anchor="middle" font-size="12" font-weight="bold" fill="#58a6ff">React + Vite UI</text>
+  <text x="155" y="130" text-anchor="middle" font-size="10" fill="#8b949e">Port 3000</text>
+  <text x="155" y="145" text-anchor="middle" font-size="10" fill="#8b949e">Chat Interface · Session Mgmt</text>
+
+  <!-- FastAPI box -->
+  <rect x="290" y="90" width="200" height="72" rx="7" fill="#1c2128" stroke="#58a6ff" stroke-width="1.2"/>
+  <text x="390" y="113" text-anchor="middle" font-size="12" font-weight="bold" fill="#58a6ff">FastAPI Backend</text>
+  <text x="390" y="130" text-anchor="middle" font-size="10" fill="#8b949e">Port 8000 · Python 3.11+</text>
+  <text x="390" y="145" text-anchor="middle" font-size="10" fill="#8b949e">Proxy · Auth · Rate Limiting</text>
+
+  <!-- Arrow React -> FastAPI -->
+  <line x1="255" y1="126" x2="290" y2="126" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+  <text x="272" y="120" text-anchor="middle" font-size="9" fill="#58a6ff">HTTP</text>
+
+  <!-- ═══════════════ LAYER 2: AGENTCORE ═══════════════ -->
+  <rect x="30" y="210" width="840" height="185" rx="10" fill="#161b22" stroke="#f78166" stroke-width="1.5"/>
+  <text x="50" y="232" font-size="11" font-weight="bold" fill="#f78166" letter-spacing="1">APPLICATION LAYER — AWS BEDROCK AGENTCORE RUNTIME</text>
+
+  <!-- AgentCore Runtime box -->
+  <rect x="55" y="242" width="220" height="132" rx="7" fill="#1c2128" stroke="#f78166" stroke-width="1.2"/>
+  <text x="165" y="263" text-anchor="middle" font-size="12" font-weight="bold" fill="#f78166">AgentCore Runtime</text>
+  <text x="165" y="281" text-anchor="middle" font-size="10" fill="#8b949e">BedrockAgentCoreApp</text>
+  <text x="165" y="297" text-anchor="middle" font-size="10" fill="#8b949e">@app.entrypoint handler</text>
+  <text x="165" y="313" text-anchor="middle" font-size="10" fill="#8b949e">Auto-scaling · CloudWatch</text>
+  <text x="165" y="329" text-anchor="middle" font-size="10" fill="#8b949e">ECR Container · IAM Roles</text>
+  <text x="165" y="345" text-anchor="middle" font-size="10" fill="#8b949e">Secrets Manager integration</text>
+  <text x="165" y="361" text-anchor="middle" font-size="10" fill="#8b949e">thread_id session isolation</text>
+
+  <!-- LangGraph Agent box -->
+  <rect x="305" y="242" width="190" height="132" rx="7" fill="#1c2128" stroke="#d2a8ff" stroke-width="1.2"/>
+  <text x="400" y="263" text-anchor="middle" font-size="12" font-weight="bold" fill="#d2a8ff">LangGraph Agent</text>
+  <text x="400" y="281" text-anchor="middle" font-size="10" fill="#8b949e">create_agent()</text>
+  <text x="400" y="297" text-anchor="middle" font-size="10" fill="#8b949e">Tool 1: search_faq (k=3)</text>
+  <text x="400" y="313" text-anchor="middle" font-size="10" fill="#8b949e">Tool 2: search_detailed (k=5)</text>
+  <text x="400" y="329" text-anchor="middle" font-size="10" fill="#8b949e">Tool 3: reformulate_query</text>
+  <text x="400" y="345" text-anchor="middle" font-size="10" fill="#8b949e">System prompt (93 lines)</text>
+  <text x="400" y="361" text-anchor="middle" font-size="10" fill="#8b949e">checkpointer for memory</text>
+
+  <!-- LLM box -->
+  <rect x="525" y="242" width="180" height="132" rx="7" fill="#1c2128" stroke="#ffa657" stroke-width="1.2"/>
+  <text x="615" y="263" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffa657">LLM + Embeddings</text>
+  <text x="615" y="281" text-anchor="middle" font-size="10" fill="#8b949e">ChatGroq</text>
+  <text x="615" y="297" text-anchor="middle" font-size="10" fill="#8b949e">openai/gpt-oss-20b</text>
+  <text x="615" y="313" text-anchor="middle" font-size="10" fill="#8b949e">temperature=0</text>
+  <text x="615" y="329" text-anchor="middle" font-size="10" fill="#8b949e">Bedrock Titan Embed v2</text>
+  <text x="615" y="345" text-anchor="middle" font-size="10" fill="#8b949e">amazon.titan-embed-text</text>
+  <text x="615" y="361" text-anchor="middle" font-size="10" fill="#8b949e">1,536-dim vectors</text>
+
+  <!-- Arrows between app layer boxes -->
+  <line x1="275" y1="308" x2="305" y2="308" stroke="#f78166" stroke-width="1.5" marker-end="url(#arrow-red)"/>
+  <line x1="495" y1="308" x2="525" y2="308" stroke="#d2a8ff" stroke-width="1.5" marker-end="url(#arrow-purple)"/>
+
+  <!-- ═══════════════ LAYER 3: DATA ═══════════════ -->
+  <rect x="30" y="428" width="840" height="130" rx="10" fill="#161b22" stroke="#e3b341" stroke-width="1.5"/>
+  <text x="50" y="450" font-size="11" font-weight="bold" fill="#e3b341" letter-spacing="1">DATA LAYER</text>
+
+  <!-- FAISS box -->
+  <rect x="55" y="460" width="175" height="80" rx="7" fill="#1c2128" stroke="#e3b341" stroke-width="1.2"/>
+  <text x="142" y="481" text-anchor="middle" font-size="12" font-weight="bold" fill="#e3b341">FAISS Index</text>
+  <text x="142" y="498" text-anchor="middle" font-size="10" fill="#8b949e">97 FAQ vectors</text>
+  <text x="142" y="514" text-anchor="middle" font-size="10" fill="#8b949e">Cosine similarity search</text>
+  <text x="142" y="530" text-anchor="middle" font-size="10" fill="#8b949e">Sub-ms query latency</text>
+
+  <!-- AgentCore Memory box -->
+  <rect x="255" y="460" width="175" height="80" rx="7" fill="#1c2128" stroke="#e3b341" stroke-width="1.2"/>
+  <text x="342" y="481" text-anchor="middle" font-size="12" font-weight="bold" fill="#e3b341">AgentCore Memory</text>
+  <text x="342" y="498" text-anchor="middle" font-size="10" fill="#8b949e">MemorySaver (session)</text>
+  <text x="342" y="514" text-anchor="middle" font-size="10" fill="#8b949e">MemoryStore (long-term)</text>
+  <text x="342" y="530" text-anchor="middle" font-size="10" fill="#8b949e">Semantic · Episode · Prefs</text>
+
+  <!-- CloudWatch box -->
+  <rect x="455" y="460" width="175" height="80" rx="7" fill="#1c2128" stroke="#e3b341" stroke-width="1.2"/>
+  <text x="542" y="481" text-anchor="middle" font-size="12" font-weight="bold" fill="#e3b341">CloudWatch</text>
+  <text x="542" y="498" text-anchor="middle" font-size="10" fill="#8b949e">All print() auto-captured</text>
+  <text x="542" y="514" text-anchor="middle" font-size="10" fill="#8b949e">Metrics · Alarms · Traces</text>
+  <text x="542" y="530" text-anchor="middle" font-size="10" fill="#8b949e">p50 / p95 / p99 latency</text>
+
+  <!-- Secrets Manager box -->
+  <rect x="655" y="460" width="185" height="80" rx="7" fill="#1c2128" stroke="#e3b341" stroke-width="1.2"/>
+  <text x="747" y="481" text-anchor="middle" font-size="12" font-weight="bold" fill="#e3b341">Secrets Manager</text>
+  <text x="747" y="498" text-anchor="middle" font-size="10" fill="#8b949e">GROQ_API_KEY (prod)</text>
+  <text x="747" y="514" text-anchor="middle" font-size="10" fill="#8b949e">.env fallback (local dev)</text>
+  <text x="747" y="530" text-anchor="middle" font-size="10" fill="#8b949e">Zero secrets in code</text>
+
+  <!-- ═══════════════ VERTICAL ARROWS (layer connectors) ═══════════════ -->
+  <!-- Frontend FastAPI -> AgentCore Runtime -->
+  <line x1="390" y1="162" x2="390" y2="195" stroke="#8b949e" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow-gray)"/>
+  <line x1="390" y1="195" x2="165" y2="195" stroke="#8b949e" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="165" y1="195" x2="165" y2="242" stroke="#8b949e" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow-gray)"/>
+  <text x="390" y="190" text-anchor="middle" font-size="9" fill="#8b949e">invoke</text>
+
+  <!-- AgentCore -> FAISS -->
+  <line x1="142" y1="374" x2="142" y2="428" stroke="#8b949e" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow-gray)"/>
+
+  <!-- LangGraph -> Memory -->
+  <line x1="342" y1="374" x2="342" y2="428" stroke="#8b949e" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow-gray)"/>
+
+  <!-- AgentCore -> CloudWatch -->
+  <line x1="542" y1="374" x2="542" y2="428" stroke="#8b949e" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow-gray)"/>
+
+  <!-- LLM -> Secrets -->
+  <line x1="747" y1="374" x2="747" y2="428" stroke="#8b949e" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow-gray)"/>
+
+  <!-- ═══════════════ CLI BADGE (bottom right) ═══════════════ -->
+  <rect x="680" y="58" width="185" height="120" rx="8" fill="#1c2128" stroke="#30a46c" stroke-width="1.2"/>
+  <text x="772" y="80" text-anchor="middle" font-size="11" font-weight="bold" fill="#30a46c">AgentCore CLI</text>
+  <text x="772" y="100" text-anchor="middle" font-size="10" fill="#8b949e" font-family="Courier New, monospace">agentcore configure -e</text>
+  <text x="772" y="116" text-anchor="middle" font-size="10" fill="#8b949e" font-family="Courier New, monospace">agentcore launch</text>
+  <text x="772" y="132" text-anchor="middle" font-size="10" fill="#8b949e" font-family="Courier New, monospace">agentcore deploy</text>
+  <text x="772" y="148" text-anchor="middle" font-size="10" fill="#8b949e" font-family="Courier New, monospace">agentcore invoke</text>
+  <text x="772" y="166" text-anchor="middle" font-size="10" fill="#30a46c">Zero infra management</text>
+
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrow-blue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#58a6ff"/>
+    </marker>
+    <marker id="arrow-red" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#f78166"/>
+    </marker>
+    <marker id="arrow-purple" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#d2a8ff"/>
+    </marker>
+    <marker id="arrow-gray" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#8b949e"/>
+    </marker>
+  </defs>
+
+</svg>
